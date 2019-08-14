@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(turtlebot_navigation)
+project(turtlebot_lidar_navigation)
 
 # Load catkin and all dependencies required for this package
 find_package(catkin REQUIRED COMPONENTS tf roscpp sensor_msgs)

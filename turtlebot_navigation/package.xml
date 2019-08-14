@@ -1,5 +1,5 @@
 <package>
-  <name>turtlebot_navigation</name>
+  <name>turtlebot_lidar_navigation</name>
   <version>2.3.7</version>
   <description>turtlebot_navigation</description>
   <maintainer email="turtlebot@osrfoundation.org">OSRF</maintainer>
@@ -22,7 +22,7 @@
   <run_depend>map_server</run_depend>  
   <run_depend>amcl</run_depend>
   <run_depend>gmapping</run_depend>
-  <run_depend>turtlebot_bringup</run_depend>
+  <run_depend>turtlebot_lidar_bringup</run_depend>
   <run_depend>dwa_local_planner</run_depend>
 
   <export>

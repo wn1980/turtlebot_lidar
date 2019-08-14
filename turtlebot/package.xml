@@ -1,5 +1,5 @@
 <package>
-  <name>turtlebot</name>
+  <name>turtlebot_lidar</name>
   <version>2.4.2</version>
   <description>
     The turtlebot meta package provides all the basic drivers for running and using a TurtleBot.
@@ -18,10 +18,12 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <run_depend>turtlebot_bringup</run_depend>
-  <run_depend>turtlebot_capabilities</run_depend>
-  <run_depend>turtlebot_description</run_depend>
-  <run_depend>turtlebot_teleop</run_depend>
+  <run_depend>turtlebot_lidar_bringup</run_depend>
+  <run_depend>turtlebot_lidar_capabilities</run_depend>
+  <run_depend>turtlebot_lidar_description</run_depend>
+  <run_depend>turtlebot_lidar_teleop</run_depend>
+  
+  <run_depend>turtlebot_lidar_navigation</run_depend>
 
   <export>
     <metapackage/>

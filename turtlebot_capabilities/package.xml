@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>turtlebot_capabilities</name>
+  <name>turtlebot_lidar_capabilities</name>
   <version>2.4.2</version>
   <description>Capabilities for the TurtleBot</description>
 

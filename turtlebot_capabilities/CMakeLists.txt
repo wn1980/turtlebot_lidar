@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(turtlebot_capabilities)
+project(turtlebot_lidar_capabilities)
 
 find_package(catkin REQUIRED)
 

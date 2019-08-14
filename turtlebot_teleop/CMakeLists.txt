@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(turtlebot_teleop)
+project(turtlebot_lidar_teleop)
 
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS roscpp geometry_msgs joy)

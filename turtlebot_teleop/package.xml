@@ -1,5 +1,5 @@
 <package>
-  <name>turtlebot_teleop</name>
+  <name>turtlebot_lidar_teleop</name>
   <version>2.4.2</version>
   <description>Provides teleoperation using joysticks or keyboard.</description>
   <maintainer email="mwise@willowgarage.com">Melonee Wise</maintainer>
@@ -21,5 +21,5 @@
   <run_depend>joy</run_depend>
   <run_depend>kobuki_safety_controller</run_depend>
   <run_depend>yocs_velocity_smoother</run_depend>
-  <run_depend>turtlebot_bringup</run_depend>
+  <run_depend>turtlebot_lidar_bringup</run_depend>
 </package>
