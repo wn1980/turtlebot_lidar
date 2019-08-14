@@ -1,5 +1,5 @@
 <package>
-  <name>turtlebot_bringup</name>
+  <name>turtlebot_lidar_bringup</name>
   <version>2.4.2</version>
   <description>
      turtlebot_bringup provides roslaunch scripts for starting the TurtleBot base functionality. 
