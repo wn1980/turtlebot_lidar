@@ -1,4 +1,5 @@
 <launch>
+  <arg name="3d_sensor" default="$(env TURTLEBOT_3D_SENSOR)"/>
   <!-- Map server -->
   <arg name="map_file" default="$(env TURTLEBOT_MAP_FILE)"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
