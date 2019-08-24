@@ -34,6 +34,4 @@
          Probably is a bug in the nodelet manager: https://github.com/ros/nodelet_core/issues/7 --> 
     <arg name="scan_topic" value="/scan" />
   </include>
-  
-  <include file="$(find turtlebot_lidar_bringup)/launch/x4.launch"/>
 </launch>
