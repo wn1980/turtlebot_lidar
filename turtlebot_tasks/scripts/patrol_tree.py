@@ -3,9 +3,11 @@
 import rospy
 from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist
-from rbx2_msgs.srv import *
+
 from pi_trees_ros.pi_trees_ros import *
 from pi_trees_lib.task_setup import *
+
+from turtlebot_lidar_tasks.srv import *
 
 class BlackBoard():
     def __init__(self):
