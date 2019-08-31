@@ -31,7 +31,7 @@ import time #for sleep()
 import roslib
 from kobuki_msgs.msg import PowerSystemEvent, AutoDockingAction, AutoDockingGoal, SensorState #for kobuki base power and auto docking
 from kobuki_msgs.msg import ButtonEvent #for kobuki base's b0 button
-from smart_battery_msgs.msg import SmartBatteryStatus #for netbook battery
+from sensor_msgs.msg import BatteryState #for netbook battery
 import math #for comparing if Kobuki's power has changed using fabs
 
 class turtlebot_coffee():
