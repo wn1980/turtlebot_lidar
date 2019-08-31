@@ -77,7 +77,7 @@ class turtlebot_coffee():
 	rospy.Subscriber("/mobile_base/sensors/core",SensorState,self.SensorPowerEventCallback)
 
 	#monitor netbook's battery power
-	rospy.Subscriber("/laptop_charge/",SmartBatteryStatus,self.NetbookPowerEventCallback)
+	rospy.Subscriber("/laptop_charge/",BatteryState,self.NetbookPowerEventCallback)
 
 	#to avoid TurtleBot from driving to another pose while someone is making coffee ... TurtleBot isn't allowed to move until the person presses the B0 button.  To implement this we need to monitor the kobuki button events
 	rospy.Subscriber("/mobile_base/events/button",ButtonEvent,self.ButtonEventCallback)

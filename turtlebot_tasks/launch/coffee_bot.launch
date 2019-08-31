@@ -10,4 +10,6 @@
     <remap from="dock_drive/motor_power" to="mobile_base/commands/motor_power"/>
     <remap from="dock_drive/velocity" to="mobile_base/commands/velocity"/>
   </node>
+  
+   <node pkg="turtlebot_lidar_tasks" name="coffee_bot" type="coffee_bot.py" output="screen"/>
 </launch>
