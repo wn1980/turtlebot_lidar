@@ -42,7 +42,7 @@ class turtlebot_coffee():
     ######## END CHANGE THE FOLLOWING VALUES #########
 
     ####### OPTIONVAL VALUES TO CHANGE ##########
-    kobuki_base_max_charge = 160 
+    kobuki_base_max_charge = 164 
     #we're using the extended battery.  Your battery may have a different max charge value.  The maximum charge for kobuki base can be determined by running:
     #rostopic echo /mobile_base/sensors/core 
     #and viewing the "battery" value.  This value is used to determine kobuki's battery status %.
