@@ -34,6 +34,8 @@ from kobuki_msgs.msg import ButtonEvent #for kobuki base's b0 button
 from sensor_msgs.msg import BatteryState #for netbook battery
 import math #for comparing if Kobuki's power has changed using fabs
 
+from voice_cmd import *
+
 class turtlebot_coffee():
     ######## CHANGE THE FOLLOWING VALUES #########
     server_public_dns = rospy.get_param('server_public_dns', 'http://localhost') #must start with http:// .  Don't include a trailing "/"
@@ -133,7 +135,8 @@ class turtlebot_coffee():
 			    #tell the server that the pose was completed
 			    data = json.load(urllib2.urlopen(self.server_public_dns + "/turtlebot-server/coffee_queue.php?update&id=" + data["id"] + "&status=complete"))
 
-	else: #no one needs coffee :(		
+	else: #no one needs coffee :(
+
 		self.count_no_one_needs_coffee_in_a_row = self.count_no_one_needs_coffee_in_a_row + 1 #increment so we know how many times in a row no one needed coffee
 		rospy.loginfo("No one needs coffee #" + str(self.count_no_one_needs_coffee_in_a_row))
 		#considering there is nothing to do... should we charge?
