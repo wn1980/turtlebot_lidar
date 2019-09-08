@@ -157,17 +157,20 @@ class turtlebot_coffee():
 			
 		r = cmd()
 		
+		#print(self.places)
+		
 		if r is not None:
 			#print(r)
 			a, q, f = r[0], r[1], r[2]
 			
-			print(q+' <> '+a)     
-			print(places) 
+			print(q+' <> '+a)
+			say(f)   
 			
 			try:
-			    p = places[a]
+			    p = self.places[a]
 			    x, y = p[0], p[1]
-			    say(f)
+			    json.load(urllib2.urlopen(self.server_public_dns + "/turtlebot-server/coffee_queue.php?push&quat_z=0.892&quat_w=-1.5&point_x=" + x + "&point_y=" + y))
+			    say('คำสั่งได้ถูกบันทึกอยู่ในคิวแล้วค่ะ')
 			except:
 				say('ไม่สามารถทำตามคำสั่งได้ค่ะ')
         
