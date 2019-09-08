@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 '''
 Copyright (c) 2015, Mark Silliman
@@ -38,7 +39,7 @@ from voice_cmd import *
 
 class turtlebot_coffee():
     ######## CHANGE THE FOLLOWING VALUES #########
-    server_public_dns = rospy.get_param('server_public_dns', 'http://localhost') #must start with http:// .  Don't include a trailing "/"
+    server_public_dns = rospy.get_param('server_public_dns', 'http://172.22.0.1') #must start with http:// .  Don't include a trailing "/"
     near_docking_station_x = rospy.get_param('near_docking_station_x', 0) #x coordinate for pose approx 1 meter from docking station
     near_docking_station_y = rospy.get_param('near_docking_station_y', 0) #y coordinate for pose approx 1 meter from docking station    
     ######## END CHANGE THE FOLLOWING VALUES #########
@@ -49,7 +50,13 @@ class turtlebot_coffee():
     #rostopic echo /mobile_base/sensors/core 
     #and viewing the "battery" value.  This value is used to determine kobuki's battery status %.
     ####### END OPTIONVAL VALUES TO CHANGE ##########
-    
+
+    # define place positions
+    places = { \
+				b'bedroom': (2, 3), \
+				b'kitchen': (1, 4) \
+			}   
+			 
     # defaults
     move_base = False # _init_ converts this to a MoveBaseAction that is used to set the goals
     battery_is_low = False # is kobuki's battery low?
@@ -88,6 +95,7 @@ class turtlebot_coffee():
 	#if someone is currently making coffee don't move!
 	if(self.cannot_move_until_b0_is_pressed):
 		rospy.loginfo("Waiting for button B0 to be pressed.")
+		say('กรุณากดปุ่ม B0 ด้วยค่ะ')
 		time.sleep(2)
 		return True
 
@@ -146,7 +154,23 @@ class turtlebot_coffee():
 			self.proactive_charging_at_dock_station = True
 		else:
 			time.sleep(2) #wait 2 seconds before asking the server if there are pending coffee needs
-
+			
+		r = cmd()
+		
+		if r is not None:
+			#print(r)
+			a, q, f = r[0], r[1], r[2]
+			
+			print(q+' <> '+a)     
+			print(places) 
+			
+			try:
+			    p = places[a]
+			    x, y = p[0], p[1]
+			    say(f)
+			except:
+				say('ไม่สามารถทำตามคำสั่งได้ค่ะ')
+        
 	return True
 
     def ButtonEventCallback(self,data):

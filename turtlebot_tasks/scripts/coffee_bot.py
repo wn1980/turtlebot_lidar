@@ -36,7 +36,7 @@ import math #for comparing if Kobuki's power has changed using fabs
 
 class turtlebot_coffee():
     ######## CHANGE THE FOLLOWING VALUES #########
-    server_public_dns = rospy.get_param('server_public_dns', 'http://localhost') #must start with http:// .  Don't include a trailing "/"
+    server_public_dns = rospy.get_param('server_public_dns', 'http://172.22.0.1') #must start with http:// .  Don't include a trailing "/"
     near_docking_station_x = rospy.get_param('near_docking_station_x', 0) #x coordinate for pose approx 1 meter from docking station
     near_docking_station_y = rospy.get_param('near_docking_station_y', 0) #y coordinate for pose approx 1 meter from docking station    
     ######## END CHANGE THE FOLLOWING VALUES #########
