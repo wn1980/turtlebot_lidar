@@ -8,7 +8,7 @@ def cmd():
 	rospy.wait_for_service('voice_cmd')
 		
 	try:
-		voice_cmd = rospy.ServiceProxy('voice_cmd', DialogflowService)
+		voice_cmd = rospy.ServiceProxy('voice_cmd', DialogflowService, persistent=True)
 		results = voice_cmd()
 		
 		if results.success:
@@ -24,7 +24,7 @@ def say(s):
 	rospy.wait_for_service('speak')
 		
 	try:
-		speak = rospy.ServiceProxy('speak', DialogflowService)
+		speak = rospy.ServiceProxy('speak', DialogflowService, persistent=True)
 		results = speak(True, s)
 		
 		if results.success:

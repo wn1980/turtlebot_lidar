@@ -51,11 +51,16 @@ class turtlebot_coffee():
     #and viewing the "battery" value.  This value is used to determine kobuki's battery status %.
     ####### END OPTIONVAL VALUES TO CHANGE ##########
 
+    #####################################################
     # define place positions
-    places = { \
-				b'bedroom': (2, 3), \
-				b'kitchen': (1, 4) \
+    places = {\
+				b'numberthree': 	(-2,-2), \
+				b'microwave': 		(2,3), 	\
+				b'bathroom': 		(2,0), 	\
+				b'kitchen': 		(3,1), 	\
+				b'bedroom': 		(3,3) 	\
 			}   
+	######################################################
 			 
     # defaults
     move_base = False # _init_ converts this to a MoveBaseAction that is used to set the goals
@@ -66,7 +71,7 @@ class turtlebot_coffee():
     charging_at_dock_station = False #can't leave docking station until it's full because battery was low
     proactive_charging_at_dock_station = False #can leave docking station as soon as a coffee request comes in because battery is fine
     count_no_one_needs_coffee_in_a_row = 0 #keeps track of how many times in a row we receive "no one needs coffee".  If there is considerable down time TurtleBot will return to the docking station to proactively charge itself.
-    how_many_no_one_needs_coffee_before_proactive_charging = 5 # how many times should we receive "no one needs coffee" prior to proactively returning to the docking station
+    how_many_no_one_needs_coffee_before_proactive_charging = 20 # how many times should we receive "no one needs coffee" prior to proactively returning to the docking station
     cannot_move_until_b0_is_pressed = False # should TurtleBot stay still until B0 is pressed (e.g. while the person is brewing coffee)?
 
     def __init__(self):
@@ -83,24 +88,19 @@ class turtlebot_coffee():
 	self.move_base.wait_for_server(rospy.Duration(30))
 
 	#monitor Kobuki's power and charging status.  If an event occurs (low battery, charging, not charging etc) call function SensorPowerEventCallback
-	rospy.Subscriber("/mobile_base/sensors/core",SensorState,self.SensorPowerEventCallback)
+	rospy.Subscriber("/mobile_base/sensors/core", SensorState, self.SensorPowerEventCallback)
 
 	#monitor netbook's battery power
 	rospy.Subscriber("/laptop_charge/",BatteryState,self.NetbookPowerEventCallback)
 
 	#to avoid TurtleBot from driving to another pose while someone is making coffee ... TurtleBot isn't allowed to move until the person presses the B0 button.  To implement this we need to monitor the kobuki button events
-	rospy.Subscriber("/mobile_base/events/button",ButtonEvent,self.ButtonEventCallback)
+	rospy.Subscriber("/mobile_base/events/button", ButtonEvent, self.ButtonEventCallback)
 
     def deliver_coffee(self):
-	#if someone is currently making coffee don't move!
-	if(self.cannot_move_until_b0_is_pressed):
-		rospy.loginfo("Waiting for button B0 to be pressed.")
-		say('กรุณากดปุ่ม B0 ด้วยค่ะ')
-		time.sleep(2)
-		return True
 
 	#before we deliver the next coffee... how is power looking? If low go recharge first at the docking station.
 	if(self.INeedPower()):
+		say('พลังงานเหลือน้อย หุ่นยนต์กำลังจะเข้าแท่นชาร์จ')
 		return True
 
 	#Power is fine so let's see if anyone needs coffee...
@@ -142,6 +142,7 @@ class turtlebot_coffee():
 			    self.count_no_one_needs_coffee_in_a_row = 0 #reset to 0
 			    #tell the server that the pose was completed
 			    data = json.load(urllib2.urlopen(self.server_public_dns + "/turtlebot-server/coffee_queue.php?update&id=" + data["id"] + "&status=complete"))
+			    say('ถึงที่หมายแล้วค่ะ')
 
 	else: #no one needs coffee :(
 
@@ -152,6 +153,7 @@ class turtlebot_coffee():
 			rospy.loginfo("Battery is fine but considering no one wants coffee ... Going to docking station.")
 			self.DockWithChargingStation() #tell TurtleBot to dock with the charging station
 			self.proactive_charging_at_dock_station = True
+			say('หุ่นยนต์กำลังจะเข้าแท่นชาร์จ เนื่องจากไม่มีคิว')
 		else:
 			time.sleep(2) #wait 2 seconds before asking the server if there are pending coffee needs
 			
@@ -169,9 +171,11 @@ class turtlebot_coffee():
 			try:
 			    p = self.places[a]
 			    x, y = p[0], p[1]
-			    json.load(urllib2.urlopen(self.server_public_dns + "/turtlebot-server/coffee_queue.php?push&quat_z=0.892&quat_w=-1.5&point_x=" + x + "&point_y=" + y))
-			    say('คำสั่งได้ถูกบันทึกอยู่ในคิวแล้วค่ะ')
-			except:
+			    #print(x, y)
+			    data = json.load( urllib2.urlopen( self.server_public_dns + "/turtlebot-server/coffee_queue.php?push&quat_z=0.892&quat_w=-1.5&point_x=" + str(x) + "&point_y=" + str(y) ) )
+			    say('คำสั่งได้บันทึกในคิวเรียบร้อยแล้วค่ะ')
+			except Exception as e:
+				print(e)
 				say('ไม่สามารถทำตามคำสั่งได้ค่ะ')
         
 	return True

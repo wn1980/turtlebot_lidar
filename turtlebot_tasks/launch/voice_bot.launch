@@ -12,6 +12,6 @@
 		<param name="near_docking_station_x" type="double" value="0"/>
 		<param name="near_docking_station_y" type="double" value="0"/>
 	
-		<param name="server_public_dns" type="str" value="http://localhost"/>
+		<param name="server_public_dns" type="str" value="http://172.22.0.1"/>
 	</node>
 </launch>
