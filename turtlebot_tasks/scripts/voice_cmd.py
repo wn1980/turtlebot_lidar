@@ -5,10 +5,10 @@ import rospy
 from dialogflow_ros.srv import DialogflowService
 
 def cmd():
-	rospy.wait_for_service('voice_cmd')
+	rospy.wait_for_service('speech/voice_cmd')
 		
 	try:
-		voice_cmd = rospy.ServiceProxy('voice_cmd', DialogflowService, persistent=True)
+		voice_cmd = rospy.ServiceProxy('speech/voice_cmd', DialogflowService, persistent=True)
 		results = voice_cmd()
 		
 		if results.success:
@@ -21,10 +21,10 @@ def cmd():
 	return None
 
 def say(s):
-	rospy.wait_for_service('speak')
+	rospy.wait_for_service('speech/speak')
 		
 	try:
-		speak = rospy.ServiceProxy('speak', DialogflowService, persistent=True)
+		speak = rospy.ServiceProxy('speech/speak', DialogflowService, persistent=True)
 		results = speak(True, s)
 		
 		if results.success:
