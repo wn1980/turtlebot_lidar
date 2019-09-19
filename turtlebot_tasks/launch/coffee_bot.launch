@@ -12,9 +12,9 @@
   </node>
   
    <node pkg="turtlebot_lidar_tasks" name="coffee_bot" type="coffee_bot.py" output="screen">
-	<param name="near_docking_station_x" type="double" value="4"/>
-	<param name="near_docking_station_y" type="double" value="4"/>
+	<param name="near_docking_station_x" type="double" value="0"/>
+	<param name="near_docking_station_y" type="double" value="0"/>
 	
-	<param name="server_public_dns" type="str" value="http://172.22.0.1"/>
+	<param name="server_public_dns" type="str" value="http://web"/>
    </node>
 </launch>
